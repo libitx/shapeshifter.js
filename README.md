@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/github/license/libitx/shapeshifter.js?color=informational)
 ![Build Status](https://img.shields.io/github/workflow/status/libitx/shapeshifter.js/Node.js%20CI)
 
-Shapeshifter.js is a JavaScript library for switching between Bitcoin transaction formats. Quickly and simply shift between raw tx formats, structured BSV Tx objects, and `TXO` and `BOB` transaction formats.
+Shapeshifter.js is a JavaScript library for switching between Bitcoin transaction formats. Quickly and simply shift between raw tx formats, structured BSV Tx objects, and `TXO` and `BOB` serialization formats.
 
 ## Installation
 
