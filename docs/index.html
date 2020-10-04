@@ -13,32 +13,34 @@
   <style type="text/css">
     .no-shrink { flex-shrink: 0; }
     .raw-pre { white-space: pre-wrap; word-break: break-all; }
+    textarea { resize: none; }
   </style>
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://metatags.io/">
+  <meta property="og:url" content="https://libitx.github.io/shapeshifter.js/">
   <meta property="og:title" content="Shapeshifter.js - Mutate between Bitcoin transaction formats with terrifying ease!">
   <meta property="og:description" content="Shapeshifter.js is a JavaScript library for switching between Bitcoin transaction formats. Quickly and simply shift between raw tx formats, structured BSV Tx objects, and TXO and BOB transaction formats.">
-  <meta property="og:image" content="/poster.jpg">
+  <meta property="og:image" content="https://libitx.github.io/shapeshifter.js/poster.jpg">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://metatags.io/">
+  <meta property="twitter:url" content="https://libitx.github.io/shapeshifter.js/">
   <meta property="twitter:title" content="Shapeshifter.js - Mutate between Bitcoin transaction formats with terrifying ease!">
   <meta property="twitter:description" content="Shapeshifter.js is a JavaScript library for switching between Bitcoin transaction formats. Quickly and simply shift between raw tx formats, structured BSV Tx objects, and TXO and BOB transaction formats.">
-  <meta property="twitter:image" content="/poster.jpg">
+  <meta property="twitter:image" content="https://libitx.github.io/shapeshifter.js/poster.jpg">
 </head>
 <body class="sans-serif near-white bg-near-black">
   <div class="vh-100 flex flex-column" x-data="shifter()">
     <header class="flex items-center no-shrink ph3">
       <div class="pv2">
-        <img src="logo.png"
-          srcset="logo.png 1x, logo@2x.png 2x"
-          alt="Shapeshifter.js" />
-        
+        <a href="https://github.com/libitx/shapeshifter.js" class="link">
+          <img src="logo.png"
+            srcset="logo.png 1x, logo@2x.png 2x"
+            alt="Shapeshifter.js" />
+        </a>
       </div>
       <div class="pl3">
-        <span class="f5 lh-title i light-silver">Mutate between Bitcoin transaction formats with terrifying ease.</span>
+        <span class="f5 lh-title i light-silver">Mutate between Bitcoin transaction formats with <strong class="fw6">terrifying</strong> ease.</span>
       </div>
       <div class="flex-auto pr3 f6 lh-copy tr">
         <span class="fw6">Convert to:</span>
@@ -72,11 +74,14 @@
             x-model="src"></textarea>
         </div>
         <div class="w-50 pl2 pr3">
-          <div class="w-100 h-100 pa2 f5 code lh-copy near-white bg-dark-gray bn br2">
-            <div class="pa2 bg-dark-red br1" x-show="err" x-text="err"></div>
-            <pre class="w-100 h-100 ma0 f6"
-              :class="resClass"
-              style="" x-show="res" x-text="res"></pre>
+          <div class="relative h-100">
+            <textarea class="input-reset w-100 h-100 pa2 f6 code lh-copy near-white bg-dark-gray bn br2"
+              readonly
+              x-model="res"
+              onclick="this.select()"></textarea>
+            <div class="absolute top-0 left-0 right-0 ma2 pa2 f5 code lh-copy near-white bg-dark-red br1"
+              x-show="err"
+              x-text="err"></div>
           </div>
         </div>
       </div>
@@ -101,6 +106,7 @@ function shifter() {
 
     shift() {
       let src, res
+      this.res = null
       this.err = null
 
       try {
