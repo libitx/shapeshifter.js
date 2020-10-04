@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 import banner from 'rollup-plugin-banner'
+import nodePolyfills from 'rollup-plugin-node-polyfills'
 
 export default {
   input: 'index.js',
@@ -37,6 +38,7 @@ export default {
       exclude: 'node_modules/**',
       babelHelpers: 'bundled'
     }),
+    nodePolyfills(),
     banner('shapeshifter.js - v<%= pkg.version %>\n<%= pkg.description %>\n<%= pkg.repository %>\nCopyright © <%= new Date().getFullYear() %> Chronos Labs Ltd. Apache-2.0 License')
   ]
 }

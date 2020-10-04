@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shapeshifter.js - Mutate between Bitcoin transaction formats with terrifying ease!</title>
+  <meta name="title" content="Shapeshifter.js - Mutate between Bitcoin transaction formats with terrifying ease!">
+  <meta name="description" content="Shapeshifter.js is a JavaScript library for switching between Bitcoin transaction formats. Quickly and simply shift between raw tx formats, structured BSV Tx objects, and TXO and BOB transaction formats.">
+  <link rel="stylesheet" href="//unpkg.com/tachyons@4.12.0/css/tachyons.min.css" />
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
+  <script src="//unpkg.com/bsv@^2.0.0-beta"></script>
+  <script src="../dist/shapeshifter.js"></script>
+  <style type="text/css">
+    .raw-pre { white-space: pre-wrap; word-break: break-all; }
+  </style>
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://metatags.io/">
+  <meta property="og:title" content="Shapeshifter.js - Mutate between Bitcoin transaction formats with terrifying ease!">
+  <meta property="og:description" content="Shapeshifter.js is a JavaScript library for switching between Bitcoin transaction formats. Quickly and simply shift between raw tx formats, structured BSV Tx objects, and TXO and BOB transaction formats.">
+  <meta property="og:image" content="/poster.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://metatags.io/">
+  <meta property="twitter:title" content="Shapeshifter.js - Mutate between Bitcoin transaction formats with terrifying ease!">
+  <meta property="twitter:description" content="Shapeshifter.js is a JavaScript library for switching between Bitcoin transaction formats. Quickly and simply shift between raw tx formats, structured BSV Tx objects, and TXO and BOB transaction formats.">
+  <meta property="twitter:image" content="/poster.jpg">
+</head>
+<body class="sans-serif near-white bg-near-black">
+  <div class="vh-100 flex flex-column" x-data="shifter()">
+    <header class="flex items-center ph3">
+      <div class="pv2">
+        <img src="logo.png"
+          srcset="logo.png 1x, logo@2x.png 2x"
+          alt="Shapeshifter.js" />
+        
+      </div>
+      <div class="pl3">
+        <span class="f5 lh-title i light-silver">Mutate between Bitcoin transaction formats with terrifying ease.</span>
+      </div>
+      <div class="flex-auto pr3 f6 lh-copy tr">
+        <span class="fw6">Convert to:</span>
+        <label class="fw3 light-silver ml3">
+          <input type="radio" class="mr1 v-mid" x-model="fmt" value="raw" />
+          Raw
+        </label>
+        <label class="fw3 light-silver ml3">
+          <input type="radio" class="mr1 v-mid" x-model="fmt" value="tx" />
+          Tx
+        </label>
+        <label class="fw3 light-silver ml3">
+          <input type="radio" class="mr1 v-mid" x-model="fmt" value="txo" />
+          TXO
+        </label>
+        <label class="fw3 light-silver ml3">
+          <input type="radio" class="mr1 v-mid" x-model="fmt" value="bob" />
+          BOB
+        </label>
+      </div>
+      <div class="pv2">
+        <a class="dib pa2 link f5 lh-block fw6 i white bg-animate bg-dark-pink hover-bg-hot-pink pointer br2"
+          x-on:click="shift()">Shift!</a>
+      </div>
+    </header>
+    <main class="flex flex-column flex-auto">
+      <div class="flex flex-auto">
+        <div class="w-50 pl3 pr2">
+          <textarea class="input-reset w-100 h-100 pa2 f6 code lh-copy near-white bg-dark-gray bn br2"
+            placeholder="Paste source transaction here&hellip;"
+            x-model="src"></textarea>
+        </div>
+        <div class="w-50 pl2 pr3">
+          <div class="w-100 h-100 pa2 f5 code lh-copy near-white bg-dark-gray bn br2">
+            <div class="pa2 bg-dark-red br1" x-show="err" x-text="err"></div>
+            <pre class="w-100 h-100 ma0 f6"
+              :class="resClass"
+              style="" x-show="res" x-text="res"></pre>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="ph3 pv2">
+      <p class="ma0 f7 lh-copy light-silver tc">
+        <a href="https://github.com/libitx/shapeshifter.js" class="link fw6 near-white hover-hot-pink">Shapeshifter.js</a>
+        is a Chronos Labs project created by 
+        <a href="https://twitter.com/libitx" class="link fw6 near-white hover-hot-pink">@libitx</a>.
+      </p>
+    </footer>
+  </div>
+
+<script>
+function shifter() {
+  return {
+    src: null,
+    res: null,
+    err: null,
+    fmt: 'bob',
+    resClass: 'overflow-scroll',
+
+    shift() {
+      let src, res
+      this.err = null
+
+      try {
+        if (this.src.match(/^[a-f0-9]+$/i)) {
+          src = this.src
+        } else {
+          src = Function('"use strict"; return ('+ this.src +')')()
+        }
+
+        switch(this.fmt) {
+          case 'raw':
+            res = Shapeshifter.toHex(src)
+            break
+          case 'tx':
+            res = Shapeshifter.toTx(src)
+            break
+          case 'txo':
+            res = Shapeshifter.toTxo(src)
+            break
+          case 'bob':
+            res = Shapeshifter.toBob(src)
+            break
+        }
+        if (this.fmt === 'raw') {
+          this.resClass = 'raw-pre'
+          this.res = res
+        } else {
+          this.resClass = 'overflow-scroll'
+          this.res = JSON.stringify(res, null, 2)
+        }
+      } catch(e) {
+        console.log(e)
+        this.err = e
+      }
+    }
+  }
+}
+</script>
+  
+</body>
+</html>
