@@ -2,7 +2,7 @@
 
 ![Shapeshifter lets you quickly and simply switch between Bitcoin transaction formats](https://github.com/libitx/shapeshifter.js/raw/master/docs/poster.jpg)
 
-![npm](https://img.shields.io/npm/v/shapeshifter.js?color=informational)
+![npm](https://img.shields.io/npm/v/@libitx/shapeshifter.js?color=informational)
 ![License](https://img.shields.io/github/license/libitx/shapeshifter.js?color=informational)
 ![Build Status](https://img.shields.io/github/workflow/status/libitx/shapeshifter.js/Node.js%20CI)
 
