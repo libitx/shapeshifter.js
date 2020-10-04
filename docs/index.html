@@ -11,6 +11,7 @@
   <script src="//unpkg.com/bsv@^2.0.0-beta"></script>
   <script src="//unpkg.com/@libitx/shapeshifter.js/dist/shapeshifter.min.js"></script>
   <style type="text/css">
+    .no-shrink { flex-shrink: 0; }
     .raw-pre { white-space: pre-wrap; word-break: break-all; }
   </style>
   <!-- Open Graph / Facebook -->
@@ -29,7 +30,7 @@
 </head>
 <body class="sans-serif near-white bg-near-black">
   <div class="vh-100 flex flex-column" x-data="shifter()">
-    <header class="flex items-center ph3">
+    <header class="flex items-center no-shrink ph3">
       <div class="pv2">
         <img src="logo.png"
           srcset="logo.png 1x, logo@2x.png 2x"
@@ -80,7 +81,7 @@
         </div>
       </div>
     </main>
-    <footer class="ph3 pv2">
+    <footer class="ph3 pv2 no-shrink">
       <p class="ma0 f7 lh-copy light-silver tc">
         <a href="https://github.com/libitx/shapeshifter.js" class="link fw6 near-white hover-hot-pink">Shapeshifter.js</a>
         is a Chronos Labs project created by 
