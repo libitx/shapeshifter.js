@@ -21,7 +21,7 @@ yarn add shapeshifter.js
 Alternatively use in a browser via CDN:
 
 ```html
-<script src="https://unpkg.com/shapeshifter.js/dist/shapeshifter.min.js"></script>
+<script src="//unpkg.com/@libitx/shapeshifter.js/dist/shapeshifter.min.js"></script>
 ```
 
 Shapeshifter has a peer dependency on version 2 the bsv library which must also be installed in your project.
