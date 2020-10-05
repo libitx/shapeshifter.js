@@ -57,6 +57,28 @@ Shapeshifter.js can also be used to convert individual inputs and outputs betwee
 
 To see Shapeshifter in action, try the [live demo](https://libitx.github.io/shapeshifter.js).
 
+## Gotcha - watch those `"f"` attributes
+
+The modern [Bitbus](https://bitbus.network) and [Bitsocket](https://bitsocket.network) services return an `"f"` attribute in both BOB and TXO schemas where the script chunk is in [excess of 512 bytes](https://docs.bitbus.network/#/?id=_5-working-with-large-data). If converting between BOB and TXO the `"f"` is kept in place, but if converting back to raw or a BSV `TxIn` instance, the `"f"` attribute is ignored, meaning you will not get the same transaction.
+
+If you wish to convert a BOB or TXO object which contains `"f"` attributes back to a raw transaction, you must first fetch the referenced data from [BitFS](https://bitfs.network) and attach it to the same cell or indexed attribute as a `"b"` or `"h"` attribute.
+
+Example:
+
+```json
+// Src object
+{
+  "f4": "ed661719089cab4be7dbeea527ffe40238d7d714e1dce5db2e2d75c8c2d1fd68.o.1.4",
+  ...
+}
+
+// Must be converted to
+{
+  "b4": "TXkgZGVhciBXb3Jtd29vZCwgCgpJdCB3YXJtcyBteSBoZWFydCB0aGF0IHlvdSBo...",
+  ...
+}
+```
+
 ## License
 
 Shapeshifter.js is open source and released under the [Apache-2 License](https://github.com/libitx/shapeshifter.js/blob/master/LICENSE).
