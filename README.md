@@ -65,7 +65,7 @@ If you wish to convert a BOB or TXO object which contains `"f"` attributes back 
 
 Example:
 
-```json
+```javascript
 // Src object
 {
   "f4": "ed661719089cab4be7dbeea527ffe40238d7d714e1dce5db2e2d75c8c2d1fd68.o.1.4",
