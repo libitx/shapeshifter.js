@@ -13,9 +13,9 @@ Shapeshifter.js is a JavaScript library for switching between Bitcoin transactio
 Install Shapeshifter with npm or yarn:
 
 ```shell
-npm install shapeshifter.js
+npm install @libitx/shapeshifter.js
 # or
-yarn add shapeshifter.js
+yarn add @libitx/shapeshifter.js
 ```
 
 Alternatively use in a browser via CDN:
