@@ -83,4 +83,4 @@ Example:
 
 Shapeshifter.js is open source and released under the [Apache-2 License](https://github.com/libitx/shapeshifter.js/blob/master/LICENSE).
 
-© Copyright 2020 libitx.
+© Copyright 2021 Chronos Labs Ltd.

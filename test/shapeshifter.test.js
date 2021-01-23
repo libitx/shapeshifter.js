@@ -2,7 +2,7 @@ import { assert } from 'chai'
 import { Tx } from 'bsv'
 import Shapeshifter from '../lib/shapeshifter'
 import * as ttx from './support/test_tx.js'
-import util from 'util'
+import * as ttxp from './support/test_pipe_tx.js'
 
 
 describe('new Shapeshifter()', () => {
@@ -205,5 +205,21 @@ describe('Shapeshifter.toBob()', () => {
     assert.throws(_ => {
       Shapeshifter.toBob({})
     }, 'The source tx is not a valid Bitcoin transaction.')
+  })
+
+  it('currectly indexes piped cells from tx', () => {
+    let res = Shapeshifter.toBob(ttxp.tx)
+    assert.deepEqual(res.out[0].tape[0], ttxp.bob.out[0].tape[0])
+    assert.deepEqual(res.out[0].tape[1], ttxp.bob.out[0].tape[1])
+    assert.deepEqual(res.out[0].tape[2], ttxp.bob.out[0].tape[2])
+    assert.deepEqual(res.out[0].tape[3], ttxp.bob.out[0].tape[3])
+  })
+
+  it('currectly indexes piped cells from txo', () => {
+    let res = Shapeshifter.toBob(ttxp.txo)
+    assert.deepEqual(res.out[0].tape[0], ttxp.bob.out[0].tape[0])
+    assert.deepEqual(res.out[0].tape[1], ttxp.bob.out[0].tape[1])
+    assert.deepEqual(res.out[0].tape[2], ttxp.bob.out[0].tape[2])
+    assert.deepEqual(res.out[0].tape[3], ttxp.bob.out[0].tape[3])
   })
 })
