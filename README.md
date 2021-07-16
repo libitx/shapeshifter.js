@@ -8,6 +8,19 @@
 
 Shapeshifter.js is a JavaScript library for switching between Bitcoin transaction formats. Quickly and simply shift between raw tx formats, structured BSV Tx objects, and `TXO` and `BOB` serialization formats.
 
+## Sponsors
+
+<p align="center">Supported by:</p>
+<p align="center">
+  <a href="https://coingeek.com" target="_blank" rel="noopener noreferrer">
+    <img src="https://www.chronoslabs.net/img/badges/coingeek.png" width="180" alt="Coingeek">
+  </a>
+</p>
+
+Your sponsorship will help us continue to release and maintain software that Bitcoin businesses and developers depend on.
+
+#### 👉 [Sponsor Chronos Labs' open source work](https://www.chronoslabs.net/sponsor/)
+
 ## Installation
 
 Install Shapeshifter with npm or yarn:
